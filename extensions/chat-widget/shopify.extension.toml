@@ -4,8 +4,8 @@ type = "theme"
 name = "AI Chat Widget"
 handle = "ai-chat-widget-main"
 
-[[settings]]
-  [[settings.blocks]]
+[settings]
+  [settings.blocks]
   type = "app"
   name = "Chat Widget"
 

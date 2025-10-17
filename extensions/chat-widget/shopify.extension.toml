@@ -4,6 +4,7 @@
 api_version = "2024-10"
 type = "theme"
 name = "AI Chat Widget"
+handle = "ai-chat-widget-main"
 
 [settings]
 

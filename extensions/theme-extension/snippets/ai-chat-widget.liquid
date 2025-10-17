@@ -1,0 +1,25 @@
+{% comment %}
+  AI Chat Widget - App Embed
+  This loads automatically when enabled in theme customizer
+{% endcomment %}
+
+{% if enabled %}
+<script>
+  window.AIChatConfig = {
+    apiUrl: 'https://twittstock.com',
+    shop: '{{ shop.permanent_domain }}',
+    {% if customer %}
+    customer: {
+      email: '{{ customer.email }}',
+      name: '{{ customer.first_name }} {{ customer.last_name }}',
+      id: '{{ customer.id }}'
+    },
+    {% endif %}
+    primaryColor: '{{ primary_color }}',
+    accentColor: '{{ accent_color }}',
+    position: '{{ position }}',
+    welcomeMessage: '{{ welcome_message }}'
+  };
+</script>
+<script src="https://twittstock.com/embed.js" defer></script>
+{% endif %}

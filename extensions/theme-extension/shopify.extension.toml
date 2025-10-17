@@ -1,0 +1,46 @@
+api_version = "2024-10"
+
+[[extensions]]
+type = "theme"
+name = "AI Chat Widget"
+
+[[extensions.settings]]
+  [[extensions.settings.blocks]]
+  type = "app_embed"
+  name = "AI Chat Widget"
+  
+  [[extensions.settings.blocks.settings]]
+  type = "checkbox"
+  id = "enabled"
+  label = "Enable chat widget"
+  default = true
+  
+  [[extensions.settings.blocks.settings]]
+  type = "select"
+  id = "position"
+  label = "Widget position"
+  default = "bottom-right"
+  options = [
+    { label = "Bottom Right", value = "bottom-right" },
+    { label = "Bottom Left", value = "bottom-left" },
+    { label = "Top Right", value = "top-right" },
+    { label = "Top Left", value = "top-left" }
+  ]
+  
+  [[extensions.settings.blocks.settings]]
+  type = "color"
+  id = "primary_color"
+  label = "Primary color"
+  default = "#5C6AC4"
+  
+  [[extensions.settings.blocks.settings]]
+  type = "color"
+  id = "accent_color"
+  label = "Accent color"
+  default = "#00848E"
+  
+  [[extensions.settings.blocks.settings]]
+  type = "text"
+  id = "welcome_message"
+  label = "Welcome message"
+  default = "Hi! How can I help you today?"

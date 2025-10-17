@@ -137,7 +137,7 @@ export default function DashboardPage() {
                   Get started in 3 simple steps:
                 </Text>
                 <InlineStack gap="200">
-                  <Button url="/app/install-widget" variant="primary">
+                  <Button url="/app/install" variant="primary">
                     1. Install Widget
                   </Button>
                   <Button url="/app/faqs">
@@ -287,7 +287,7 @@ export default function DashboardPage() {
                 Quick Actions
               </Text>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '12px' }}>
-                <Button url="/app/install-widget" variant="primary" size="large" fullWidth>
+                <Button url="/app/install" variant="primary" size="large" fullWidth>
                   ⚡ Install Widget
                 </Button>
                 <Button url="/app/faqs" size="large" fullWidth>
@@ -339,7 +339,7 @@ export default function DashboardPage() {
                     <Text as="p" variant="bodyMd" tone="subdued" alignment="center">
                       Install the widget to start receiving customer messages
                     </Text>
-                    <Button url="/app/install-widget" variant="primary">
+                    <Button url="/app/install" variant="primary">
                       Install Widget Now
                     </Button>
                   </BlockStack>

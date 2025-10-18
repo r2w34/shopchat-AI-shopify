@@ -16,7 +16,7 @@
   
   // Configuration
   const config = {
-    apiUrl: 'https://twittstock.com',
+    apiUrl: 'https://shopchatai.indigenservices.com',
     shop: shop,
     primaryColor: '#5C6AC4',
     accentColor: '#00848E',

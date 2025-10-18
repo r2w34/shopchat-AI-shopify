@@ -105,11 +105,11 @@ export async function action({ request }: ActionFunctionArgs) {
       },
     });
 
-    // Update session
+    // Update session (updatedAt will be automatically updated by Prisma)
     await db.chatSession.update({
       where: { id: session.id },
       data: {
-        lastMessageAt: new Date(),
+        sentiment: sentiment,
       },
     });
 

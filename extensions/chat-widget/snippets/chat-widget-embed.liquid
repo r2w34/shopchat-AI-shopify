@@ -1,0 +1,27 @@
+{% comment %}
+  AI Chat Widget - App Embed
+  This loads automatically when enabled in theme customizer
+{% endcomment %}
+
+{% if enabled %}
+<script>
+  window.AIChatConfig = {
+    apiUrl: '{{ api_url | default: "https://shopchatai.indigenservices.com" }}',
+    shop: '{{ shop.permanent_domain }}',
+    {% if customer %}
+    customer: {
+      email: '{{ customer.email }}',
+      name: '{{ customer.first_name }} {{ customer.last_name }}',
+      id: '{{ customer.id }}'
+    },
+    {% endif %}
+    primaryColor: '{{ primary_color | default: "#5C6AC4" }}',
+    accentColor: '{{ accent_color | default: "#00848E" }}',
+    position: '{{ position | default: "bottom-right" }}',
+    welcomeMessage: '{{ welcome_message | default: "Hi! How can I help you today?" }}'
+  };
+  
+  console.log('✅ AI Chat Widget Config:', window.AIChatConfig);
+</script>
+<script src="https://shopchatai.indigenservices.com/widget-loader.js" defer></script>
+{% endif %}

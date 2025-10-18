@@ -4,47 +4,54 @@ type = "theme"
 name = "AI Chat Widget"
 handle = "ai-chat-widget-main"
 
-[settings]
-  [settings.blocks]
-  type = "app"
-  name = "Chat Widget"
+[[extensions]]
+type = "app_embed"
+name = "AI Chat Widget"
+metafields = []
 
-    [[settings.blocks.settings]]
-    type = "checkbox"
-    id = "enabled"
-    label = "Enable chat widget"
-    default = true
-    info = "Show/hide the chat widget on your storefront"
+  [[extensions.settings]]
+  type = "checkbox"
+  id = "enabled"
+  label = "Enable chat widget"
+  default = true
+  info = "Show/hide the chat widget on your storefront"
 
-    [[settings.blocks.settings]]
-    type = "select"
-    id = "position"
-    label = "Widget position"
-    default = "bottom-right"
-    options = [
-      { value = "bottom-right", label = "Bottom Right" },
-      { value = "bottom-left", label = "Bottom Left" },
-      { value = "top-right", label = "Top Right" },
-      { value = "top-left", label = "Top Left" }
-    ]
+  [[extensions.settings]]
+  type = "text"
+  id = "api_url"
+  label = "API URL"
+  default = "https://shopchatai.indigenservices.com"
+  info = "The URL of your chat API server"
 
-    [[settings.blocks.settings]]
-    type = "color"
-    id = "primary_color"
-    label = "Primary color"
-    default = "#5C6AC4"
-    info = "Main color for the chat widget"
+  [[extensions.settings]]
+  type = "select"
+  id = "position"
+  label = "Widget position"
+  default = "bottom-right"
+  options = [
+    { value = "bottom-right", label = "Bottom Right" },
+    { value = "bottom-left", label = "Bottom Left" },
+    { value = "top-right", label = "Top Right" },
+    { value = "top-left", label = "Top Left" }
+  ]
 
-    [[settings.blocks.settings]]
-    type = "color"
-    id = "accent_color"
-    label = "Accent color"
-    default = "#00848E"
-    info = "Accent color for buttons and highlights"
+  [[extensions.settings]]
+  type = "color"
+  id = "primary_color"
+  label = "Primary color"
+  default = "#5C6AC4"
+  info = "Main color for the chat widget"
 
-    [[settings.blocks.settings]]
-    type = "text"
-    id = "welcome_message"
-    label = "Welcome message"
-    default = "Hi! How can I help you today?"
-    info = "First message customers see"
+  [[extensions.settings]]
+  type = "color"
+  id = "accent_color"
+  label = "Accent color"
+  default = "#00848E"
+  info = "Accent color for buttons and highlights"
+
+  [[extensions.settings]]
+  type = "text"
+  id = "welcome_message"
+  label = "Welcome message"
+  default = "Hi! How can I help you today?"
+  info = "First message customers see"

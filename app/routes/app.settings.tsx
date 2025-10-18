@@ -65,7 +65,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
     // Create default settings if they don't exist
     if (!store.chatSettings) {
-      store.chatSettings = await db.chatSettings.create({
+      store.chatSettings = await prisma.chatSettings.create({
         data: {
           storeId: store.id,
           enabled: true,

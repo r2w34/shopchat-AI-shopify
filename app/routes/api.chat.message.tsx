@@ -80,7 +80,7 @@ export async function action({ request }: ActionFunctionArgs) {
     const faqs = await db.fAQ.findMany({
       where: {
         storeId: store.id,
-        isActive: true,
+        enabled: true,
       },
       take: 10,
     });

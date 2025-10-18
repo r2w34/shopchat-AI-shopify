@@ -43,10 +43,8 @@ io.on('connection', (socket) => {
   });
 });
 
-// Parse JSON bodies
-app.use(express.json());
-
 // CORS middleware for all routes
+// NOTE: We don't use express.json() because Remix handles body parsing
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');

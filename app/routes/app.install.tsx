@@ -38,15 +38,13 @@ export default function InstallWidgetPage() {
   const customizeUrl = `https://${shop}/admin/themes/current/editor`;
 
   const openThemeCustomizer = () => {
-    shopify.navigate("admin", {
-      name: "admin.themes.current.editor",
-    });
+    // Navigate to theme editor using admin path
+    shopify.navigate(`admin/themes/current/editor`);
   };
 
   const openThemesPage = () => {
-    shopify.navigate("admin", {
-      name: "admin.themes.index",
-    });
+    // Navigate to themes page using admin path
+    shopify.navigate(`admin/themes`);
   };
 
   const openStorefront = () => {

@@ -1,26 +1,27 @@
-# AI Chat Widget - Theme Extension Configuration
-api_version = "2024-10"
-type = "theme"
 name = "AI Chat Widget"
-handle = "ai-chat-widget-main"
+type = "theme"
 
 [[extensions]]
 type = "app_embed"
 name = "AI Chat Widget"
-metafields = []
+
+  [[extensions.settings]]
+  type = "paragraph"
+  content = "Display an AI-powered chat widget on your storefront to help customers with product questions, orders, and support."
 
   [[extensions.settings]]
   type = "text"
   id = "api_url"
   label = "API URL"
   default = "https://shopchatai.indigenservices.com"
-  info = "The URL of your chat API server"
+  info = "The URL of your chat API server. Do not change unless instructed."
 
   [[extensions.settings]]
   type = "select"
   id = "position"
   label = "Widget position"
   default = "bottom-right"
+  info = "Where the chat button appears on your store"
   options = [
     { value = "bottom-right", label = "Bottom Right" },
     { value = "bottom-left", label = "Bottom Left" },
@@ -47,4 +48,4 @@ metafields = []
   id = "welcome_message"
   label = "Welcome message"
   default = "Hi! How can I help you today?"
-  info = "First message customers see"
+  info = "First message customers see when opening the chat"

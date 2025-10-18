@@ -1,0 +1,41 @@
+{% comment %}
+  AI Chat Widget - App Embed Block
+  This block loads a chat widget on the storefront
+  Target: body (injected before </body> tag)
+{% endcomment %}
+
+{% schema %}
+{
+  "name": "AI Chat Widget",
+  "target": "body",
+  "settings": []
+}
+{% endschema %}
+
+<script>
+  (function() {
+    // Set configuration from theme editor settings
+    window.AIChatConfig = {
+      apiUrl: {{ app.metafields.chat_widget.api_url | default: "https://shopchatai.indigenservices.com" | json }},
+      shop: {{ shop.permanent_domain | json }},
+      {% if customer %}
+      customer: {
+        email: {{ customer.email | json }},
+        name: {{ customer.name | json }},
+        id: {{ customer.id | json }}
+      },
+      {% endif %}
+      primaryColor: {{ app.metafields.chat_widget.primary_color | default: "#5C6AC4" | json }},
+      accentColor: {{ app.metafields.chat_widget.accent_color | default: "#00848E" | json }},
+      position: {{ app.metafields.chat_widget.position | default: "bottom-right" | json }},
+      welcomeMessage: {{ app.metafields.chat_widget.welcome_message | default: "Hi! How can I help you today?" | json }}
+    };
+    
+    // Load widget script
+    var script = document.createElement('script');
+    script.src = 'https://shopchatai.indigenservices.com/widget-loader.js';
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+  })();
+</script>

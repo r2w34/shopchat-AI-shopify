@@ -1,44 +1,43 @@
 name = "AI Chat Widget"
 type = "theme"
-handle = "ai-chat-widget"
 
-[[extensions]]
+[settings]
+  [[settings.blocks]]
   type = "app_embed"
   name = "AI Chat Widget"
-  handle = "ai-chat-embed"
   
-  [[extensions.settings]]
-  type = "checkbox"
-  id = "enabled"
-  label = "Enable chat widget"
-  default = true
+    [[settings.blocks.settings]]
+    type = "checkbox"
+    id = "enabled"
+    label = "Enable chat widget"
+    default = true
 
-  [[extensions.settings]]
-  type = "select"
-  id = "position"
-  label = "Widget position"
-  default = "bottom-right"
-  options = [
-    { label = "Bottom Right", value = "bottom-right" },
-    { label = "Bottom Left", value = "bottom-left" },
-    { label = "Top Right", value = "top-right" },
-    { label = "Top Left", value = "top-left" }
-  ]
+    [[settings.blocks.settings]]
+    type = "select"
+    id = "position"
+    label = "Widget position"
+    default = "bottom-right"
+    options = [
+      { label = "Bottom Right", value = "bottom-right" },
+      { label = "Bottom Left", value = "bottom-left" },
+      { label = "Top Right", value = "top-right" },
+      { label = "Top Left", value = "top-left" }
+    ]
 
-  [[extensions.settings]]
-  type = "color"
-  id = "primary_color"
-  label = "Primary color"
-  default = "#5C6AC4"
+    [[settings.blocks.settings]]
+    type = "color"
+    id = "primary_color"
+    label = "Primary color"
+    default = "#5C6AC4"
 
-  [[extensions.settings]]
-  type = "color"
-  id = "accent_color"
-  label = "Accent color"
-  default = "#00848E"
+    [[settings.blocks.settings]]
+    type = "color"
+    id = "accent_color"
+    label = "Accent color"
+    default = "#00848E"
 
-  [[extensions.settings]]
-  type = "text"
-  id = "welcome_message"
-  label = "Welcome message"
-  default = "Hi! How can I help you today?"
+    [[settings.blocks.settings]]
+    type = "text"
+    id = "welcome_message"
+    label = "Welcome message"
+    default = "Hi! How can I help you today?"

@@ -22,16 +22,23 @@ export async function action({ request }: ActionFunctionArgs) {
     let body;
     try {
       const text = await request.text();
+      console.log("📨 Received request body:", text);
       body = text ? JSON.parse(text) : {};
+      console.log("📦 Parsed body:", JSON.stringify(body));
     } catch (parseError) {
-      console.error("Failed to parse request body:", parseError);
+      console.error("❌ Failed to parse request body:", parseError);
       return cors(request, json({ error: "Invalid JSON" }, { status: 400 }));
     }
 
     const { message, shop, customer, sessionId } = body;
+    console.log("✅ Extracted fields:", { message, shop, hasCustomer: !!customer, sessionId });
 
     if (!message || !shop) {
-      return cors(request, json({ error: "Missing required fields" }, { status: 400 }));
+      console.error("❌ Missing required fields:", { message: !!message, shop: !!shop });
+      return cors(request, json({ 
+        error: "Missing required fields",
+        details: { messageProvided: !!message, shopProvided: !!shop }
+      }, { status: 400 }));
     }
 
     // Find or create store

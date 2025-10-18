@@ -1,9 +1,8 @@
 {% comment %}
   AI Chat Widget - App Embed
-  This loads automatically when enabled in theme customizer
+  Loads automatically when enabled in theme customizer
 {% endcomment %}
 
-{% if enabled %}
 <script>
   window.AIChatConfig = {
     apiUrl: '{{ api_url | default: "https://shopchatai.indigenservices.com" }}',
@@ -21,7 +20,6 @@
     welcomeMessage: '{{ welcome_message | default: "Hi! How can I help you today?" }}'
   };
   
-  console.log('✅ AI Chat Widget Config:', window.AIChatConfig);
+  console.log('✅ AI Chat Widget Loading...', window.AIChatConfig);
 </script>
 <script src="https://shopchatai.indigenservices.com/widget-loader.js" defer></script>
-{% endif %}

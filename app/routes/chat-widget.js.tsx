@@ -9,7 +9,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
     
     // Replace localhost with actual domain
     js = js.replace(/localhost:3000/g, "shopchatai.indigenservices.com");
-    js = js.replace(/http:\/\/twittstock/g, "https://twittstock");
+    js = js.replace(/http:\/\/twittstock/g, "https://shopchatai.indigenservices.com");
+    js = js.replace(/https:\/\/twittstock\.com/g, "https://shopchatai.indigenservices.com");
     
     return new Response(js, {
       headers: {

@@ -24,13 +24,21 @@ export async function action({ request }: ActionFunctionArgs) {
       return json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    // Find store
-    const store = await db.store.findUnique({
+    // Find or create store
+    let store = await db.store.findUnique({
       where: { shopDomain: shop },
     });
 
     if (!store) {
-      return json({ error: "Store not found" }, { status: 404 });
+      // Create store if it doesn't exist
+      store = await db.store.create({
+        data: {
+          shopDomain: shop,
+          accessToken: "", // Will be set during OAuth
+          plan: "free",
+          isActive: true,
+        },
+      });
     }
 
     // Get or create session
@@ -108,10 +116,14 @@ export async function action({ request }: ActionFunctionArgs) {
     return cors(request, response);
   } catch (error) {
     console.error("Chat API error:", error);
+    console.error("Error details:", error instanceof Error ? error.message : String(error));
+    console.error("Error stack:", error instanceof Error ? error.stack : "No stack trace");
+    
     const response = json(
       { 
         error: "Failed to process message",
-        reply: "I apologize, but I'm having trouble right now. Please try again or contact support."
+        reply: "I apologize, but I'm having trouble right now. Please try again or contact support.",
+        debug: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.message : String(error)) : undefined
       },
       { status: 500 }
     );

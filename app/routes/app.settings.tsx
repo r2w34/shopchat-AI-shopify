@@ -59,8 +59,29 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
       include: { chatSettings: true },
     });
 
-    if (!store || !store.chatSettings) {
+    if (!store) {
       return json({ error: 'Store not found' }, { status: 404 });
+    }
+
+    // Create default settings if they don't exist
+    if (!store.chatSettings) {
+      store.chatSettings = await db.chatSettings.create({
+        data: {
+          storeId: store.id,
+          enabled: true,
+          widgetPosition: "bottom-right",
+          primaryColor: "#5C6AC4",
+          accentColor: "#00848E",
+          welcomeMessage: "Hi! How can I help you today?",
+          offlineMessage: "We're currently offline. Leave a message!",
+          autoReplyEnabled: true,
+          orderTrackingEnabled: true,
+          productRecsEnabled: true,
+          languages: "en",
+          aiModel: "gpt-4",
+          aiTemperature: 0.7,
+        }
+      });
     }
 
     return json<LoaderData>({

@@ -15,9 +15,9 @@
       position: {{ position | default: "bottom-right" | json }},
       welcomeMessage: {{ welcome_message | default: "Hi! How can I help you today?" | json }}
     };
-    
+
     console.log('✅ AI Chat Widget Config Set:', window.AIChatConfig);
-    
+
     var script = document.createElement('script');
     script.src = 'https://shopchatai.indigenservices.com/widget-loader.js';
     script.defer = true;

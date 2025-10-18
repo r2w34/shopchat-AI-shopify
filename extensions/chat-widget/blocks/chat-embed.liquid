@@ -1,22 +1,54 @@
 {% comment %}
   AI Chat Widget - App Embed Block
-  This block loads a chat widget on the storefront
-  Target: body (injected before </body> tag)
+  Loads a floating chat widget on all storefront pages
 {% endcomment %}
 
 {% schema %}
 {
   "name": "AI Chat Widget",
   "target": "body",
-  "settings": []
+  "settings": [
+    {
+      "type": "text",
+      "id": "api_url",
+      "label": "API URL",
+      "default": "https://shopchatai.indigenservices.com",
+      "info": "Do not change unless instructed"
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "label": "Position",
+      "default": "bottom-right",
+      "options": [
+        { "value": "bottom-right", "label": "Bottom Right" },
+        { "value": "bottom-left", "label": "Bottom Left" },
+        { "value": "top-right", "label": "Top Right" },
+        { "value": "top-left", "label": "Top Left" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "primary_color",
+      "label": "Primary Color",
+      "default": "#5C6AC4"
+    },
+    {
+      "type": "text",
+      "id": "welcome_message",
+      "label": "Welcome Message",
+      "default": "Hi! How can I help you today?"
+    }
+  ]
 }
 {% endschema %}
 
 <script>
   (function() {
-    // Set configuration from theme editor settings
+    console.log('🤖 AI Chat Widget: Initializing...');
+    
     window.AIChatConfig = {
-      apiUrl: {{ app.metafields.chat_widget.api_url | default: "https://shopchatai.indigenservices.com" | json }},
+      apiUrl: {{ block.settings.api_url | default: "https://shopchatai.indigenservices.com" | json }},
       shop: {{ shop.permanent_domain | json }},
       {% if customer %}
       customer: {
@@ -25,17 +57,24 @@
         id: {{ customer.id | json }}
       },
       {% endif %}
-      primaryColor: {{ app.metafields.chat_widget.primary_color | default: "#5C6AC4" | json }},
-      accentColor: {{ app.metafields.chat_widget.accent_color | default: "#00848E" | json }},
-      position: {{ app.metafields.chat_widget.position | default: "bottom-right" | json }},
-      welcomeMessage: {{ app.metafields.chat_widget.welcome_message | default: "Hi! How can I help you today?" | json }}
+      primaryColor: {{ block.settings.primary_color | default: "#5C6AC4" | json }},
+      accentColor: "#00848E",
+      position: {{ block.settings.position | default: "bottom-right" | json }},
+      welcomeMessage: {{ block.settings.welcome_message | default: "Hi! How can I help you today?" | json }}
     };
     
-    // Load widget script
+    console.log('✅ AI Chat Config:', window.AIChatConfig);
+    
     var script = document.createElement('script');
-    script.src = 'https://shopchatai.indigenservices.com/widget-loader.js';
+    script.src = window.AIChatConfig.apiUrl + '/widget-loader.js';
     script.async = true;
     script.defer = true;
+    script.onload = function() {
+      console.log('✅ Widget script loaded');
+    };
+    script.onerror = function() {
+      console.error('❌ Failed to load widget script');
+    };
     document.body.appendChild(script);
   })();
 </script>

@@ -137,6 +137,24 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 }
 
-export async function loader() {
-  return json({ message: "Use POST method" }, { status: 405 });
+export async function loader({ request }: ActionFunctionArgs) {
+  // Handle CORS preflight for GET/OPTIONS
+  if (request.method === "OPTIONS") {
+    return new Response(null, {
+      status: 204,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
+    });
+  }
+  
+  return new Response(JSON.stringify({ message: "Use POST method" }), {
+    status: 405,
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
 }

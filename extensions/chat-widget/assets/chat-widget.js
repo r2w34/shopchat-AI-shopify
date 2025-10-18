@@ -6,8 +6,9 @@
 (function() {
   'use strict';
 
-  // Configuration
-  const API_BASE = window.location.origin;
+  // Configuration - Use the global config or fallback to our API URL
+  const globalConfig = window.AIChatConfig || {};
+  const API_BASE = globalConfig.apiUrl || 'https://shopchatai.indigenservices.com';
   const SOCKET_URL = API_BASE;
 
   class AIChatWidget {

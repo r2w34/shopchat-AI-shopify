@@ -34,7 +34,7 @@ export async function action({ request }: ActionFunctionArgs) {
       store = await db.store.create({
         data: {
           shopDomain: shop,
-          accessToken: "", // Will be set during OAuth
+          shopName: shop,
           plan: "free",
           isActive: true,
         },

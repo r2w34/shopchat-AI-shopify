@@ -1,22 +1,11 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { cors } from "../utils/cors.server";
 import db from "../db.server";
 import { generateAIResponse, analyzeSentiment } from "../services/ai.server";
 
 export async function action({ request }: ActionFunctionArgs) {
-  // Handle CORS preflight
-  if (request.method === "OPTIONS") {
-    return new Response(null, {
-      status: 204,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type",
-      },
-    });
-  }
-
+  // CORS is handled by server.mjs global middleware
+  
   try {
     // Parse request body
     let body;
@@ -27,7 +16,7 @@ export async function action({ request }: ActionFunctionArgs) {
       console.log("📦 Parsed body:", JSON.stringify(body));
     } catch (parseError) {
       console.error("❌ Failed to parse request body:", parseError);
-      return cors(request, json({ error: "Invalid JSON" }, { status: 400 }));
+      return json({ error: "Invalid JSON" }, { status: 400 });
     }
 
     const { message, shop, customer, sessionId } = body;
@@ -35,7 +24,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
     if (!message || !shop) {
       console.error("❌ Missing required fields:", { message: !!message, shop: !!shop });
-      return cors(request, json({ 
+      return json({ 
         error: "Missing required fields",
         details: { messageProvided: !!message, shopProvided: !!shop }
       }, { status: 400 }));
@@ -136,7 +125,7 @@ export async function action({ request }: ActionFunctionArgs) {
       sentiment: sentiment,
     });
 
-    return cors(request, response);
+    return response;
   } catch (error) {
     console.error("Chat API error:", error);
     console.error("Error details:", error instanceof Error ? error.message : String(error));
@@ -150,7 +139,7 @@ export async function action({ request }: ActionFunctionArgs) {
       },
       { status: 500 }
     );
-    return cors(request, response);
+    return response;
   }
 }
 

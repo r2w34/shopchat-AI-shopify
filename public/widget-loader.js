@@ -47,7 +47,7 @@
             <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
           </svg>
         </button>
-        <div id="ai-chat-window" class="ai-chat-window" style="display: none; position: fixed; ${config.position.includes('bottom') ? 'bottom: 90px;' : 'top: 90px;'} ${config.position.includes('right') ? 'right: 20px;' : 'left: 20px;'} width: 380px; max-width: calc(100vw - 40px); height: 600px; max-height: calc(100vh - 120px); background: white; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); z-index: 999999; display: flex; flex-direction: column;">
+        <div id="ai-chat-window" class="ai-chat-window" style="display: none; position: fixed; ${config.position.includes('bottom') ? 'bottom: 90px;' : 'top: 90px;'} ${config.position.includes('right') ? 'right: 20px;' : 'left: 20px;'} width: 380px; max-width: calc(100vw - 40px); height: 600px; max-height: calc(100vh - 120px); background: white; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); z-index: 999999; flex-direction: column;">
           <div class="ai-chat-header" style="background: ${config.primaryColor}; color: white; padding: 20px; border-radius: 12px 12px 0 0; display: flex; justify-content: space-between; align-items: center;">
             <div>
               <h3 style="margin: 0; font-size: 18px; font-weight: 600;">Chat Support</h3>

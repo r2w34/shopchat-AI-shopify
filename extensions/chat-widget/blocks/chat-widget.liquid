@@ -21,7 +21,7 @@
 (function() {
   const config = {
     shop: '{{ shop.permanent_domain }}',
-    apiUrl: '{{ block.settings.api_url }}',
+    apiUrl: '{{ block.settings.api_url | default: "https://shopchatai.indigenservices.com" }}',
     position: '{{ block.settings.position }}',
     primaryColor: '{{ block.settings.primary_color }}',
     welcomeMessage: '{{ block.settings.welcome_message }}',
@@ -30,14 +30,22 @@
     button_text: '{{ block.settings.button_text }}'
   };
 
+  // Set global config before loading widget
+  window.AIChatConfig = config;
+  console.log('✅ AIChatConfig set:', config);
+
   // Load widget script
   const script = document.createElement('script');
   script.src = config.apiUrl + '/chat-widget.js';
   script.async = true;
   script.onload = function() {
+    console.log('✅ Chat widget script loaded');
     if (window.initAIChatWidget) {
       window.initAIChatWidget(config);
     }
+  };
+  script.onerror = function() {
+    console.error('❌ Failed to load chat widget script from:', config.apiUrl);
   };
   document.body.appendChild(script);
 

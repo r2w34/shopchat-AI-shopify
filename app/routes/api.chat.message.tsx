@@ -27,7 +27,7 @@ export async function action({ request }: ActionFunctionArgs) {
       return json({ 
         error: "Missing required fields",
         details: { messageProvided: !!message, shopProvided: !!shop }
-      }, { status: 400 }));
+      }, { status: 400 });
     }
 
     // Find or create store

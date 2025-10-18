@@ -78,7 +78,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
           orderTrackingEnabled: true,
           productRecsEnabled: true,
           languages: "en",
-          aiModel: "gpt-4",
+          aiModel: "gemini-2.0-flash-exp",
           aiTemperature: 0.7,
         }
       });
@@ -179,7 +179,7 @@ export default function Settings() {
   const [orderTrackingEnabled, setOrderTrackingEnabled] = useState(data.settings?.orderTrackingEnabled ?? true);
   const [productRecsEnabled, setProductRecsEnabled] = useState(data.settings?.productRecsEnabled ?? true);
   const [languages, setLanguages] = useState(data.settings?.languages ?? 'en');
-  const [aiModel, setAiModel] = useState(data.settings?.aiModel ?? 'gpt-4');
+  const [aiModel, setAiModel] = useState(data.settings?.aiModel ?? 'gemini-2.0-flash-exp');
   const [aiTemperature, setAiTemperature] = useState(data.settings?.aiTemperature?.toString() ?? '0.7');
   const [maxTokens, setMaxTokens] = useState(data.settings?.maxTokens?.toString() ?? '150');
 
@@ -216,8 +216,9 @@ export default function Settings() {
   ];
 
   const aiModelOptions = [
-    { label: 'GPT-4 (Recommended)', value: 'gpt-4' },
-    { label: 'GPT-3.5 Turbo (Faster)', value: 'gpt-3.5-turbo' },
+    { label: 'Gemini 2.0 Flash (Recommended)', value: 'gemini-2.0-flash-exp' },
+    { label: 'Gemini 1.5 Pro (Advanced)', value: 'gemini-1.5-pro' },
+    { label: 'Gemini 1.5 Flash (Fast)', value: 'gemini-1.5-flash' },
   ];
 
   return (
@@ -378,7 +379,7 @@ export default function Settings() {
                   options={aiModelOptions}
                   value={aiModel}
                   onChange={setAiModel}
-                  helpText="GPT-4 provides better responses but costs more"
+                  helpText="Gemini 2.0 Flash provides fast, high-quality responses"
                 />
 
                 <TextField

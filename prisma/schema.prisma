@@ -71,7 +71,7 @@ model ChatSettings {
   orderTrackingEnabled  Boolean  @default(true)
   productRecsEnabled    Boolean  @default(true)
   languages             String   @default("en")
-  aiModel               String   @default("gpt-4")
+  aiModel               String   @default("gemini-2.0-flash-exp")
   aiTemperature         Float    @default(0.7)
   maxTokens             Int      @default(500)
   createdAt             DateTime @default(now())

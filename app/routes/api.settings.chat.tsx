@@ -32,7 +32,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
       orderTrackingEnabled: true,
       productRecsEnabled: true,
       languages: 'en',
-      aiModel: 'gpt-4',
+      aiModel: 'gemini-2.0-flash-exp',
       aiTemperature: 0.7,
       maxTokens: 500,
     };
@@ -97,7 +97,7 @@ export async function action({ request }: ActionFunctionArgs) {
         orderTrackingEnabled: orderTrackingEnabled !== undefined ? orderTrackingEnabled : true,
         productRecsEnabled: productRecsEnabled !== undefined ? productRecsEnabled : true,
         languages: languages || 'en',
-        aiModel: aiModel || 'gpt-4',
+        aiModel: aiModel || 'gemini-2.0-flash-exp',
         aiTemperature: aiTemperature !== undefined ? aiTemperature : 0.7,
         maxTokens: maxTokens || 500,
       },

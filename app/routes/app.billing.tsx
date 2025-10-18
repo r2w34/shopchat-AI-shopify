@@ -27,7 +27,7 @@ const BILLING_PLANS = [
     price: 0,
     features: [
       '50 chats per month',
-      'Basic AI (GPT-3.5-turbo)',
+      'Gemini 1.5 Flash AI',
       'Email support',
       '1 language',
       'Basic analytics',
@@ -39,7 +39,7 @@ const BILLING_PLANS = [
     price: 29.99,
     features: [
       '500 chats per month',
-      'GPT-4 AI',
+      'Gemini 2.0 Flash AI',
       'Order tracking',
       'Product recommendations',
       'Email support',
@@ -54,7 +54,7 @@ const BILLING_PLANS = [
     price: 79.99,
     features: [
       '2,000 chats per month',
-      'GPT-4 AI',
+      'Gemini 1.5 Pro AI',
       'All integrations',
       'Cart abandonment recovery',
       'Analytics dashboard',
@@ -71,7 +71,7 @@ const BILLING_PLANS = [
     price: 199.99,
     features: [
       'Unlimited chats',
-      'GPT-4 AI',
+      'Gemini 1.5 Pro AI',
       'Custom AI training',
       'WhatsApp & FB Messenger',
       'Dedicated account manager',

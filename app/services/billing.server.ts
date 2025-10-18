@@ -26,9 +26,9 @@ export const BILLING_PLANS: Record<string, BillingPlan> = {
     currency: 'USD',
     interval: 'EVERY_30_DAYS',
     trialDays: 0,
-    features: ['50 chats/month', 'Basic AI', 'Email support'],
+    features: ['50 chats/month', 'Gemini 1.5 Flash AI', 'Email support'],
     chatLimit: 50,
-    aiModel: 'gpt-3.5-turbo',
+    aiModel: 'gemini-1.5-flash',
   },
   starter: {
     id: 'starter',
@@ -39,13 +39,13 @@ export const BILLING_PLANS: Record<string, BillingPlan> = {
     trialDays: 14,
     features: [
       '500 chats/month',
-      'GPT-4 AI',
+      'Gemini 2.0 Flash AI',
       'Order tracking',
       'Product recommendations',
       'Email support',
     ],
     chatLimit: 500,
-    aiModel: 'gpt-4',
+    aiModel: 'gemini-2.0-flash-exp',
   },
   professional: {
     id: 'professional',
@@ -56,7 +56,7 @@ export const BILLING_PLANS: Record<string, BillingPlan> = {
     trialDays: 14,
     features: [
       '2000 chats/month',
-      'GPT-4 AI',
+      'Gemini 1.5 Pro AI',
       'All integrations',
       'Cart abandonment',
       'Analytics dashboard',
@@ -64,7 +64,7 @@ export const BILLING_PLANS: Record<string, BillingPlan> = {
       'Priority support',
     ],
     chatLimit: 2000,
-    aiModel: 'gpt-4',
+    aiModel: 'gemini-1.5-pro',
   },
   enterprise: {
     id: 'enterprise',
@@ -75,7 +75,7 @@ export const BILLING_PLANS: Record<string, BillingPlan> = {
     trialDays: 14,
     features: [
       'Unlimited chats',
-      'GPT-4 AI',
+      'Gemini 1.5 Pro AI',
       'Custom AI training',
       'WhatsApp & Messenger',
       'Dedicated support',
@@ -83,7 +83,7 @@ export const BILLING_PLANS: Record<string, BillingPlan> = {
       'SLA guarantee',
     ],
     chatLimit: -1,
-    aiModel: 'gpt-4',
+    aiModel: 'gemini-1.5-pro',
   },
 };
 

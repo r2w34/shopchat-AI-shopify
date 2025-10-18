@@ -150,20 +150,38 @@ export default function Settings() {
 
   const isLoading = navigation.state === "submitting";
 
-  // Form state
-  const [enabled, setEnabled] = useState(data.settings.enabled);
-  const [widgetPosition, setWidgetPosition] = useState(data.settings.widgetPosition);
-  const [primaryColor, setPrimaryColor] = useState(data.settings.primaryColor);
-  const [accentColor, setAccentColor] = useState(data.settings.accentColor);
-  const [welcomeMessage, setWelcomeMessage] = useState(data.settings.welcomeMessage);
-  const [offlineMessage, setOfflineMessage] = useState(data.settings.offlineMessage);
-  const [autoReplyEnabled, setAutoReplyEnabled] = useState(data.settings.autoReplyEnabled);
-  const [orderTrackingEnabled, setOrderTrackingEnabled] = useState(data.settings.orderTrackingEnabled);
-  const [productRecsEnabled, setProductRecsEnabled] = useState(data.settings.productRecsEnabled);
-  const [languages, setLanguages] = useState(data.settings.languages);
-  const [aiModel, setAiModel] = useState(data.settings.aiModel);
-  const [aiTemperature, setAiTemperature] = useState(data.settings.aiTemperature.toString());
-  const [maxTokens, setMaxTokens] = useState(data.settings.maxTokens.toString());
+  // Handle error state
+  if ('error' in data) {
+    return (
+      <Page>
+        <TitleBar title="Settings" />
+        <Layout>
+          <Layout.Section>
+            <Card>
+              <BlockStack gap="4">
+                <Text as="p" variant="bodyLg">Error loading settings: {data.error}</Text>
+              </BlockStack>
+            </Card>
+          </Layout.Section>
+        </Layout>
+      </Page>
+    );
+  }
+
+  // Form state with safe defaults
+  const [enabled, setEnabled] = useState(data.settings?.enabled ?? true);
+  const [widgetPosition, setWidgetPosition] = useState(data.settings?.widgetPosition ?? 'bottom-right');
+  const [primaryColor, setPrimaryColor] = useState(data.settings?.primaryColor ?? '#5C6AC4');
+  const [accentColor, setAccentColor] = useState(data.settings?.accentColor ?? '#00848E');
+  const [welcomeMessage, setWelcomeMessage] = useState(data.settings?.welcomeMessage ?? 'Hi! How can I help you today?');
+  const [offlineMessage, setOfflineMessage] = useState(data.settings?.offlineMessage ?? 'We\'re currently offline. Leave a message!');
+  const [autoReplyEnabled, setAutoReplyEnabled] = useState(data.settings?.autoReplyEnabled ?? true);
+  const [orderTrackingEnabled, setOrderTrackingEnabled] = useState(data.settings?.orderTrackingEnabled ?? true);
+  const [productRecsEnabled, setProductRecsEnabled] = useState(data.settings?.productRecsEnabled ?? true);
+  const [languages, setLanguages] = useState(data.settings?.languages ?? 'en');
+  const [aiModel, setAiModel] = useState(data.settings?.aiModel ?? 'gpt-4');
+  const [aiTemperature, setAiTemperature] = useState(data.settings?.aiTemperature?.toString() ?? '0.7');
+  const [maxTokens, setMaxTokens] = useState(data.settings?.maxTokens?.toString() ?? '150');
 
   const handleSubmit = useCallback(() => {
     const formData = new FormData();

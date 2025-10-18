@@ -157,7 +157,7 @@ export default function PrivacyPolicy() {
           <li><strong>Right to Withdraw Consent:</strong> Withdraw consent at any time</li>
         </ul>
         <p>
-          To exercise any of these rights, please contact us at: <strong>support@shopchatai.com</strong>
+          To exercise any of these rights, please contact us at: <strong>support@indigenservices.com</strong>
         </p>
       </section>
 
@@ -253,7 +253,7 @@ export default function PrivacyPolicy() {
         </p>
         <div style={{ backgroundColor: "#f7f7f7", padding: "20px", borderRadius: "8px", marginTop: "15px" }}>
           <p><strong>ShopChat AI</strong></p>
-          <p>Email: <a href="mailto:support@shopchatai.com" style={{ color: "#5C6AC4" }}>support@shopchatai.com</a></p>
+          <p>Email: <a href="mailto:support@indigenservices.com" style={{ color: "#5C6AC4" }}>support@indigenservices.com</a></p>
           <p>Website: <a href="https://shopchatai.indigenservices.com" style={{ color: "#5C6AC4" }}>https://shopchatai.indigenservices.com</a></p>
         </div>
       </section>

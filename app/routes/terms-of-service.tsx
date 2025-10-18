@@ -223,7 +223,7 @@ export default function TermsOfService() {
           <li><strong>Pro Plan:</strong> Priority email support with 8-hour response time</li>
           <li><strong>Enterprise Plan:</strong> 24/7 support with 2-hour response time</li>
         </ul>
-        <p>Contact support at: <a href="mailto:support@shopchatai.com" style={{ color: "#5C6AC4" }}>support@shopchatai.com</a></p>
+        <p>Contact support at: <a href="mailto:support@indigenservices.com" style={{ color: "#5C6AC4" }}>support@indigenservices.com</a></p>
       </section>
 
       <section style={{ marginBottom: "30px" }}>
@@ -323,7 +323,7 @@ export default function TermsOfService() {
         
         <h3 style={{ fontSize: "1.3em", marginTop: "20px", marginBottom: "10px" }}>15.1 Governing Law</h3>
         <p>
-          These Terms are governed by the laws of the State of [YOUR STATE], United States, without regard 
+          These Terms are governed by the laws of the State of Delaware, United States, without regard 
           to conflict of law principles.
         </p>
 
@@ -388,8 +388,8 @@ export default function TermsOfService() {
           For questions about these Terms, contact us:
         </p>
         <div style={{ backgroundColor: "#f7f7f7", padding: "20px", borderRadius: "8px", marginTop: "15px" }}>
-          <p><strong>ShopChat AI</strong></p>
-          <p>Email: <a href="mailto:support@shopchatai.com" style={{ color: "#5C6AC4" }}>support@shopchatai.com</a></p>
+          <p><strong>ShopChat AI / Indigen Services</strong></p>
+          <p>Email: <a href="mailto:support@indigenservices.com" style={{ color: "#5C6AC4" }}>support@indigenservices.com</a></p>
           <p>Website: <a href="https://shopchatai.indigenservices.com" style={{ color: "#5C6AC4" }}>https://shopchatai.indigenservices.com</a></p>
         </div>
       </section>

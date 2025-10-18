@@ -8,7 +8,7 @@
   
   // Configuration
   const config = window.AIChatConfig || {
-    apiUrl: 'https://twittstock.com',
+    apiUrl: 'https://shopchatai.indigenservices.com',
     primaryColor: '#5C6AC4',
     accentColor: '#00848E',
     position: 'bottom-right',

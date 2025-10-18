@@ -6,8 +6,9 @@
 (function() {
   'use strict';
 
-  // Configuration
-  const API_BASE = window.location.origin;
+  // Configuration - use the config provided by embed or fall back to current origin
+  const config = window.AIChatConfig || {};
+  const API_BASE = config.apiUrl || window.location.origin;
   const SOCKET_URL = API_BASE;
 
   class AIChatWidget {

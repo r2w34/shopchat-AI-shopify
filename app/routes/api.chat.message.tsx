@@ -10,9 +10,7 @@ export async function action({ request }: ActionFunctionArgs) {
     // Parse request body
     let body;
     try {
-      const text = await request.text();
-      console.log("📨 Received request body:", text);
-      body = text ? JSON.parse(text) : {};
+      body = await request.json();
       console.log("📦 Parsed body:", JSON.stringify(body));
     } catch (parseError) {
       console.error("❌ Failed to parse request body:", parseError);

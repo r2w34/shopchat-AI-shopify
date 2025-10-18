@@ -18,8 +18,8 @@ export async function generateAIResponse(
   context: ChatContext
 ): Promise<string> {
   try {
-    // Get Gemini Pro model
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    // Get Gemini 1.5 Flash model (updated model name)
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     // Build context for the AI
     let systemContext = `You are an AI shopping assistant for ${context.shop}. 
@@ -63,7 +63,7 @@ export async function generateProductRecommendations(
   products: any[]
 ): Promise<string> {
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const productsContext = products.map((p, i) => 
       `${i + 1}. ${p.title} - ${p.description?.substring(0, 100) || 'No description'}`
@@ -89,7 +89,7 @@ Recommend 2-3 relevant products from the list above. Be specific and helpful.`;
 // Function to analyze customer sentiment
 export async function analyzeSentiment(message: string): Promise<'positive' | 'neutral' | 'negative'> {
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const prompt = `Analyze the sentiment of this customer message and respond with only one word: "positive", "neutral", or "negative"
 

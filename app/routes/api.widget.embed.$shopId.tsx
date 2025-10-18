@@ -25,14 +25,23 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
     let store = null;
     
     // Check if it's a database ID
-    if (shopId.startsWith('shop_')) {
+    if (shopId.startsWith('shop_') || shopId.startsWith('c')) {
       store = await prisma.store.findFirst({
         where: { id: shopId },
         select: {
           id: true,
-          shop: true,
-          settings: true,
+          shopDomain: true,
+          shopName: true,
           isActive: true,
+          chatSettings: {
+            select: {
+              enabled: true,
+              widgetPosition: true,
+              primaryColor: true,
+              accentColor: true,
+              welcomeMessage: true,
+            }
+          }
         }
       });
     }
@@ -40,12 +49,21 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
     // If not found, try as shop domain
     if (!store) {
       store = await prisma.store.findFirst({
-        where: { shop: shopId },
+        where: { shopDomain: shopId },
         select: {
           id: true,
-          shop: true,
-          settings: true,
+          shopDomain: true,
+          shopName: true,
           isActive: true,
+          chatSettings: {
+            select: {
+              enabled: true,
+              widgetPosition: true,
+              primaryColor: true,
+              accentColor: true,
+              welcomeMessage: true,
+            }
+          }
         }
       });
     }
@@ -77,14 +95,15 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
     }
 
     // Store found - return shop-specific configuration
-    const settings = store.settings as any || {};
+    const settings = store.chatSettings || {};
     const appUrl = process.env.SHOPIFY_APP_URL || process.env.HOST || 'https://shopchatai.indigenservices.com';
     
     const config = {
-      shop: store.shop,
+      shop: store.shopDomain,
+      shopName: store.shopName,
       primaryColor: settings.primaryColor || '#5C6AC4',
       accentColor: settings.accentColor || '#00848E',
-      position: settings.position || 'bottom-right',
+      position: settings.widgetPosition || 'bottom-right',
       welcomeMessage: settings.welcomeMessage || 'Hi! How can I help you today?',
       enabled: store.isActive && (settings.enabled !== false),
     };
@@ -93,7 +112,8 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
       success: true,
       store: {
         id: store.id,
-        shop: store.shop,
+        shop: store.shopDomain,
+        shopName: store.shopName,
         isActive: store.isActive,
       },
       config,

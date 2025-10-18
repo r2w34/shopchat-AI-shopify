@@ -11,18 +11,22 @@
 
   console.log('AI Chat Widget: Loading...');
 
-  // Get shop from Shopify
-  const shop = window.Shopify ? window.Shopify.shop : '';
+  // Get configuration from window or use defaults
+  const defaultShop = window.Shopify ? window.Shopify.shop : '';
+  const globalConfig = window.AIChatConfig || {};
   
-  // Configuration
+  // Merge configuration with defaults
   const config = {
-    apiUrl: 'https://shopchatai.indigenservices.com',
-    shop: shop,
-    primaryColor: '#5C6AC4',
-    accentColor: '#00848E',
-    position: 'bottom-right',
-    welcomeMessage: 'Hi! How can I help you today?'
+    apiUrl: globalConfig.apiUrl || 'https://shopchatai.indigenservices.com',
+    shop: globalConfig.shop || defaultShop,
+    primaryColor: globalConfig.primaryColor || '#5C6AC4',
+    accentColor: globalConfig.accentColor || '#00848E',
+    position: globalConfig.position || 'bottom-right',
+    welcomeMessage: globalConfig.welcomeMessage || 'Hi! How can I help you today?',
+    customer: globalConfig.customer || null
   };
+  
+  console.log('Widget Config:', config);
 
   // Get customer info if available
   if (window.ShopifyAnalytics && window.ShopifyAnalytics.meta) {
@@ -138,6 +142,9 @@
 
       // Send to API
       try {
+        console.log('Sending message to:', config.apiUrl + '/api/chat/message');
+        console.log('Payload:', { message, shop: config.shop });
+        
         const response = await fetch(config.apiUrl + '/api/chat/message', {
           method: 'POST',
           headers: {
@@ -146,22 +153,27 @@
           body: JSON.stringify({
             message: message,
             shop: config.shop,
-            customer: config.customer
+            customer: config.customer || {}
           })
         });
 
+        console.log('Response status:', response.status);
         const data = await response.json();
+        console.log('Response data:', data);
+        
         typing.style.display = 'none';
 
         if (data.reply) {
           addMessage(data.reply, 'ai');
+        } else if (data.error) {
+          addMessage(data.error, 'ai');
         } else {
           addMessage('Sorry, I encountered an error. Please try again.', 'ai');
         }
       } catch (error) {
         console.error('AI Chat Widget: API error:', error);
         typing.style.display = 'none';
-        addMessage('Sorry, I am having trouble connecting. Please try again later.', 'ai');
+        addMessage('Connection error. Please try again.', 'ai');
       }
     });
 

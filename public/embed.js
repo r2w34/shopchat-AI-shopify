@@ -25,14 +25,17 @@
 
   // Load JS
   const loadJS = () => {
+    // Set global config before loading widget
+    window.AIChatConfig = config;
+    
     const script = document.createElement('script');
-    script.src = config.apiUrl + '/chat-widget.js';
-    script.async = true;
+    script.src = config.apiUrl + '/widget-loader.js';
+    script.async = false; // Load synchronously to ensure config is set
     script.onload = () => {
       console.log('AI Chat Widget loaded successfully');
-      if (window.initAIChatWidget) {
-        window.initAIChatWidget(config);
-      }
+    };
+    script.onerror = (error) => {
+      console.error('Failed to load chat widget:', error);
     };
     document.head.appendChild(script);
   };

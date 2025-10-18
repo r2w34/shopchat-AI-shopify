@@ -70,9 +70,9 @@ export async function action({ request }: ActionFunctionArgs) {
     await db.chatMessage.create({
       data: {
         sessionId: session.id,
-        storeId: store.id,
+        sender: customer?.name || customer?.email || "Guest",
         message: message,
-        role: "user",
+        isAI: false,
       },
     });
 
@@ -99,9 +99,9 @@ export async function action({ request }: ActionFunctionArgs) {
     await db.chatMessage.create({
       data: {
         sessionId: session.id,
-        storeId: store.id,
+        sender: "AI Assistant",
         message: aiResponse,
-        role: "assistant",
+        isAI: true,
       },
     });
 

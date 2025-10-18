@@ -18,6 +18,7 @@ import {
 } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
 import { authenticate } from "../shopify.server";
+import { useAppBridge } from "@shopify/app-bridge-react";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const { session } = await authenticate.admin(request);
@@ -31,9 +32,26 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export default function InstallWidgetPage() {
   const { shop, apiKey } = useLoaderData<typeof loader>();
   const [copied, setCopied] = useState(false);
+  const shopify = useAppBridge();
 
   const themeUrl = `https://${shop}/admin/themes`;
   const customizeUrl = `https://${shop}/admin/themes/current/editor`;
+
+  const openThemeCustomizer = () => {
+    shopify.navigate("admin", {
+      name: "admin.themes.current.editor",
+    });
+  };
+
+  const openThemesPage = () => {
+    shopify.navigate("admin", {
+      name: "admin.themes.index",
+    });
+  };
+
+  const openStorefront = () => {
+    window.open(`https://${shop}`, '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <Page>
@@ -91,16 +109,14 @@ export default function InstallWidgetPage() {
 
                     <InlineStack gap="200">
                       <Button
-                        url={customizeUrl}
-                        external
+                        onClick={openThemeCustomizer}
                         variant="primary"
                         size="large"
                       >
                         Open Theme Customizer
                       </Button>
                       <Button
-                        url={themeUrl}
-                        external
+                        onClick={openThemesPage}
                       >
                         Or Go to Themes Page
                       </Button>
@@ -216,8 +232,7 @@ export default function InstallWidgetPage() {
                     </Text>
 
                     <Button
-                      url={`https://${shop}`}
-                      external
+                      onClick={openStorefront}
                       variant="primary"
                       size="large"
                     >

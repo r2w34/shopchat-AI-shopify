@@ -10,11 +10,17 @@ import db from "../db.server";
  * Sent 10 days after request (or 6 months if recent orders exist)
  */
 export async function action({ request }: ActionFunctionArgs) {
+  // Verify this is a POST request
+  if (request.method !== "POST") {
+    return new Response("Method Not Allowed", { status: 405 });
+  }
+
   try {
-    const { shop, payload } = await authenticate.webhook(request);
+    const { shop, payload, topic } = await authenticate.webhook(request);
 
     console.log("🗑️  GDPR: Customer redaction request received", {
       shop,
+      topic,
       customerId: payload.customer?.id,
       customerEmail: payload.customer?.email,
       ordersToRedact: payload.orders_to_redact?.length || 0,
@@ -59,16 +65,27 @@ export async function action({ request }: ActionFunctionArgs) {
       });
     }
 
-    // Must respond with 200 status
+    // Must respond with 200 status to acknowledge receipt
     return json({ success: true }, { status: 200 });
-  } catch (error) {
+    
+  } catch (error: any) {
     console.error("❌ Error redacting customer data:", error);
-    // Still return 200 to acknowledge receipt
-    return json({ success: false, error: "Processing failed" }, { status: 200 });
+    
+    // If authentication failed (invalid HMAC), return 401
+    if (error.message?.includes("HMAC") || error.message?.includes("Unauthorized")) {
+      console.error("🔒 HMAC verification failed");
+      return new Response("Unauthorized - Invalid HMAC", { status: 401 });
+    }
+    
+    // For other errors, return 500
+    return json(
+      { success: false, error: "Internal server error" }, 
+      { status: 500 }
+    );
   }
 }
 
 // Reject non-POST requests
 export async function loader() {
-  return json({ error: "Method not allowed" }, { status: 405 });
+  return new Response("Method Not Allowed", { status: 405 });
 }

@@ -50,12 +50,18 @@ export async function action({ request }: ActionFunctionArgs) {
     }
 
     if (!session) {
+      // Generate a unique session token
+      const sessionToken = `session_${Date.now()}_${Math.random().toString(36).substring(7)}`;
+      
       session = await db.chatSession.create({
         data: {
           storeId: store.id,
-          customerEmail: customer?.email,
-          customerName: customer?.name,
+          sessionToken: sessionToken,
+          customerEmail: customer?.email || `guest_${Date.now()}@temp.com`,
+          customerName: customer?.name || "Guest",
           status: "active",
+          channel: "widget",
+          language: "en",
         },
       });
     }

@@ -1,9 +1,11 @@
 name = "AI Chat Widget"
 type = "theme"
+handle = "ai-chat-widget"
 
 [[extensions]]
   type = "app_embed"
   name = "AI Chat Widget"
+  handle = "ai-chat-embed"
   
   [[extensions.settings]]
   type = "checkbox"

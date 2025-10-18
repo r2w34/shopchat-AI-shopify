@@ -18,10 +18,20 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   try {
-    const { message, shop, customer, sessionId } = await request.json();
+    // Parse request body
+    let body;
+    try {
+      const text = await request.text();
+      body = text ? JSON.parse(text) : {};
+    } catch (parseError) {
+      console.error("Failed to parse request body:", parseError);
+      return cors(request, json({ error: "Invalid JSON" }, { status: 400 }));
+    }
+
+    const { message, shop, customer, sessionId } = body;
 
     if (!message || !shop) {
-      return json({ error: "Missing required fields" }, { status: 400 });
+      return cors(request, json({ error: "Missing required fields" }, { status: 400 }));
     }
 
     // Find or create store

@@ -15,6 +15,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
   try {
     // authenticate.webhook() automatically validates HMAC
+    // If HMAC is invalid, it will throw an error
     const { shop, payload, topic } = await authenticate.webhook(request);
 
     console.log("📨 Webhook received", {
@@ -40,15 +41,31 @@ export async function action({ request }: ActionFunctionArgs) {
     }
     
   } catch (error: any) {
-    console.error("❌ Error processing webhook:", error);
+    console.error("❌ Error processing webhook:", {
+      message: error.message,
+      stack: error.stack,
+      type: error.constructor.name,
+    });
     
-    // If authentication failed (invalid HMAC), return 401
-    if (error.message?.includes("HMAC") || error.message?.includes("Unauthorized")) {
+    // Check if this is an authentication error (invalid HMAC)
+    // The Shopify SDK throws a Response object with 401 status
+    if (error instanceof Response) {
+      console.error("🔒 Authentication failed - returning error response");
+      return error; // Return the 401 response from SDK
+    }
+    
+    // Check error message for HMAC/auth keywords
+    const errorMsg = error.message?.toLowerCase() || "";
+    if (errorMsg.includes("hmac") || 
+        errorMsg.includes("unauthorized") || 
+        errorMsg.includes("authentication") ||
+        errorMsg.includes("invalid signature")) {
       console.error("🔒 HMAC verification failed");
-      return new Response("Unauthorized - Invalid HMAC", { status: 401 });
+      return new Response("Unauthorized", { status: 401 });
     }
     
     // For other errors, return 500
+    console.error("⚠️ Internal server error during webhook processing");
     return json(
       { success: false, error: "Internal server error" }, 
       { status: 500 }
